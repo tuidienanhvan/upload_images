@@ -27,17 +27,19 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// Endpoint upload ảnh
+// ✅ Endpoint upload ảnh
 app.post('/upload', upload.single('image'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
-  const fileUrl = `https://your-server-url.com/uploads/${req.file.filename}`;
+
+  // ✅ Sửa lại đúng URL render
+  const fileUrl = `https://upload-images-dukc.onrender.com/uploads/${req.file.filename}`;
   res.status(200).json({ url: fileUrl });
 });
 
-// Chạy server
+// ✅ Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
